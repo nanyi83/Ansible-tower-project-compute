@@ -1,0 +1,42 @@
+---
+  hosts: all
+  tasks:
+    -ec2-vpc:
+      aws_access_key: AKIA3DGD6V6YM7ZO53XP
+      aws_secret_key: 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
+      state: present
+      region: us-east-2
+      cidr_block: 10.0.0.0/16
+      resource_tag:
+        name: assignment-vpc
+      subnets:
+        -cidr: 10.0.1.0/24
+        az: us-east-2a
+        name: VpcPubSN
+        -cidr: 10.0.2.0/24
+         az: us-east-2b
+         name: VpcPriSN
+      internetgateway: yes
+      routetable:
+        -subnets:
+          -10.0.1.0/24
+          -10.0.2.0/24
+        -routes:
+          -dest: 0.0.0.0/0
+           gw: igw
+      name: webserver security group
+          -proto: tcp
+           from_port: 80
+           to_port: 80
+           cidr_ip: 0.0.0.0/0
+           from_port: 22
+           to_port: 22
+           cidr_ip: 0.0.0.0/0
+
+    - ec2_instance:
+        name: provision ec2 instance
+        image:  ami-01e36b7901e884a10
+        instance_type: t2.micro
+        region: us-east-2
+        security_group: default
+        keypair: R
