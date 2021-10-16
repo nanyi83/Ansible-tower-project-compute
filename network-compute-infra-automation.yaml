@@ -33,10 +33,12 @@
            to_port: 22
            cidr_ip: 0.0.0.0/0
 
-    - ec2_instance:
+      - ec2_instance:
         name: provision ec2 instance
         image:  ami-01e36b7901e884a10
         instance_type: t2.micro
         region: us-east-2
         security_group: default
-        keypair: R
+        keypair: RDSkeypair
+        network: 10.0.1.0/24
+        assign_public_ip: yes
