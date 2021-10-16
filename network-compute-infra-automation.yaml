@@ -1,7 +1,4 @@
-
-  hosts: all
-  tasks:
-    -ec2-vpc:
+ -ec2-vpc:
       aws_access_key: AKIA3DGD6V6YM7ZO53XP
       aws_secret_key: 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
       state: present
@@ -10,18 +7,18 @@
       resource_tag:
         name: assignment-vpc
       subnets:
-        -cidr: 10.0.1.0/24
+        -cidr: 10.0.1.0/22
         az: us-east-2a
         name: VpcPubSN
         -cidr: 10.0.2.0/24
-         az: us-east-2a
+         az: us-east-2b
          name: VpcPriSN
       internetgateway: yes
       routetable:
         -subnets:
-          -10.0.1.0/24
+          -10.0.1.0/22
           -10.0.2.0/24
-        -routes:
+         routes:
           -dest: 0.0.0.0/0
            gw: igw
       name: webserver security group
