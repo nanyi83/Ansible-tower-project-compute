@@ -1,4 +1,4 @@
----
+
   hosts: all
   tasks:
     -ec2-vpc:
@@ -14,7 +14,7 @@
         az: us-east-2a
         name: VpcPubSN
         -cidr: 10.0.2.0/24
-         az: us-east-2b
+         az: us-east-2a
          name: VpcPriSN
       internetgateway: yes
       routetable:
